@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{90987DDF-7206-425D-86BE-9D146B048D85}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConsoleFormsLibrary</RootNamespace>
+    <AssemblyName>ConsoleFormsLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CellsGraphicLibrary">
+      <HintPath>..\CellsGraphicLibrary\bin\Debug\CellsGraphicLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="DrawingLibrary">
+      <HintPath>..\DrawingLibrary\bin\Debug\DrawingLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Consoles\Abstract\Cmd.cs" />
+    <Compile Include="Consoles\Abstract\IDriver.cs" />
+    <Compile Include="Consoles\ConsoleArea.cs" />
+    <Compile Include="ConsoleTypes\Line.cs" />
+    <Compile Include="Controls\BarControl.cs" />
+    <Compile Include="Controls\ButtonControl.cs" />
+    <Compile Include="Picture\MulticoloredLinesArrayPicture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ConsoleTypes\ColoredChar.cs" />
+    <Compile Include="ConsoleTypes\ColoredLine.cs" />
+    <Compile Include="ConsoleTypes\MulticoloredLine.cs" />
+    <Compile Include="Controls\Abstract\Control.cs" />
+    <Compile Include="Controls\Abstract\ControlContainer.cs" />
+    <Compile Include="Controls\Abstract\IReadOnlyControl.cs" />
+    <Compile Include="Controls\Abstract\IReadOnlyControlContainer.cs" />
+    <Compile Include="Controls\MulticoloredLabelControl.cs" />
+    <Compile Include="Controls\PanelControl.cs" />
+    <Compile Include="Controls\RadioControl.cs" />
+    <Compile Include="Picture\Abstract\IColoredCharPictureContainer.cs" />
+    <Compile Include="Picture\Abstract\IReadOnlyColoredCharPicture.cs" />
+    <Compile Include="Picture\ColoredCharsArrayPicture.cs" />
+    <Compile Include="Picture\ColoredLinesArrayPicture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicLibrary.Framework4.8\BasicLibrary.csproj">
+      <Project>{890651DF-C0C2-43FA-B0B2-80F39CBC7022}</Project>
+      <Name>BasicLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
