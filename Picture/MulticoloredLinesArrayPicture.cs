@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using LinesLibrary;
+
 namespace ConsoleFormsLibrary {
     public class MulticoloredLinesArrayPicture : IReadOnlyColoredCharPicture {
         public bool IsTransparent { get; set; }

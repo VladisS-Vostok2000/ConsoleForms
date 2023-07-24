@@ -6,6 +6,8 @@ using BasicLibrary;
 using ConsoleFormsLibrary.Controls.Abstract;
 using DrawingLibrary;
 
+using LinesLibrary;
+
 namespace ConsoleFormsLibrary.Controls {
     public class PanelControl : ControlContainer {
         public override IReadOnlyColoredCharPicture Picture => EditablePicture;
@@ -34,7 +36,7 @@ namespace ConsoleFormsLibrary.Controls {
 
 
 
-        public override void Render() {
+        protected override void _Render() {
             if (EditablePicture == null || EditablePicture.Size != Area.Size) {
                 EditablePicture = new ColoredCharsArrayPicture(Area.Size);
             }

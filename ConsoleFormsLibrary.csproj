@@ -31,11 +31,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BasicLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BasicLibrary.Framework4.8\bin\Debug\BasicLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="CellsGraphicLibrary">
       <HintPath>..\CellsGraphicLibrary\bin\Debug\CellsGraphicLibrary.dll</HintPath>
     </Reference>
     <Reference Include="DrawingLibrary">
       <HintPath>..\DrawingLibrary\bin\Debug\DrawingLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="LinesLibrary">
+      <HintPath>..\LinesLibrary\bin\Debug\LinesLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,15 +57,10 @@
   <ItemGroup>
     <Compile Include="Consoles\Abstract\Cmd.cs" />
     <Compile Include="Consoles\Abstract\IDriver.cs" />
-    <Compile Include="Consoles\ConsoleArea.cs" />
-    <Compile Include="ConsoleTypes\Line.cs" />
     <Compile Include="Controls\BarControl.cs" />
     <Compile Include="Controls\ButtonControl.cs" />
     <Compile Include="Picture\MulticoloredLinesArrayPicture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConsoleTypes\ColoredChar.cs" />
-    <Compile Include="ConsoleTypes\ColoredLine.cs" />
-    <Compile Include="ConsoleTypes\MulticoloredLine.cs" />
     <Compile Include="Controls\Abstract\Control.cs" />
     <Compile Include="Controls\Abstract\ControlContainer.cs" />
     <Compile Include="Controls\Abstract\IReadOnlyControl.cs" />
@@ -66,16 +68,9 @@
     <Compile Include="Controls\MulticoloredLabelControl.cs" />
     <Compile Include="Controls\PanelControl.cs" />
     <Compile Include="Controls\RadioControl.cs" />
-    <Compile Include="Picture\Abstract\IColoredCharPictureContainer.cs" />
     <Compile Include="Picture\Abstract\IReadOnlyColoredCharPicture.cs" />
     <Compile Include="Picture\ColoredCharsArrayPicture.cs" />
     <Compile Include="Picture\ColoredLinesArrayPicture.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BasicLibrary.Framework4.8\BasicLibrary.csproj">
-      <Project>{890651DF-C0C2-43FA-B0B2-80F39CBC7022}</Project>
-      <Name>BasicLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

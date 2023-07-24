@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using ConsoleFormsLibrary.Controls;
 using ConsoleFormsLibrary.Controls.Abstract;
@@ -11,6 +8,8 @@ using CellsGraphicLibrary;
 using static CellsGraphicLibrary.Static;
 using DrawingLibrary;
 using BasicLibrary;
+using LinesLibrary;
+using System;
 
 namespace ConsoleFormsLibrary.Consoles.Abstract {
     public abstract class Cmd {
@@ -20,18 +19,39 @@ namespace ConsoleFormsLibrary.Consoles.Abstract {
 
 
 
+        private IDriver driver;
+        protected IDriver Driver {
+            get => driver;
+            set => driver = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+
+
+        protected Cmd(IDriver driver) {
+            Driver = driver;
+        }
+
+
+
+        /// <summary>
+        /// Preparing console to visualize controls and drawing they. 
+        /// </summary>
         public abstract void Visualize();
 
 
 
-        protected void Visualize(IDriver driver) {
+        /// <summary>
+        /// Drawing existing controls in area.
+        /// </summary>
+        protected void VisualizeControls() {
             List<IReadOnlyControl> controls = Controls.ToList();
+
             if (controls.Count > 1) {
                 controls.Sort((control1, control2) => control1.Priority.CompareTo(control2.Priority));
             }
 
             foreach (var control in controls) {
-                Point consoleTopLeft = new Point(0, 0);
+                Point consoleTopLeft = Point.Empty;
                 Area consoleArea = new Area(consoleTopLeft, Size);
                 bool inConsole = IsOverlapping(consoleArea, control.Area);
                 if (!inConsole) {
@@ -39,42 +59,42 @@ namespace ConsoleFormsLibrary.Consoles.Abstract {
                 }
 
                 Area controlConsoleArea = GetOverlappingArea(consoleArea, control.Area);
-                Visualize(control, consoleTopLeft, new ConsoleArea(controlConsoleArea, driver));
+                Visualize(control, consoleTopLeft, controlConsoleArea);
             }
         }
 
 
 
-        private void Visualize(IReadOnlyControl control, Point parentLocation, ConsoleArea consoleArea) {
-            Area controlConsoleArea = new Area(parentLocation.Sum(control.Area.Location), control.Area.Size);
+        private void Visualize(IReadOnlyControl control, Point parentLocation, Area consoleArea) {
+            Area controlAreaLocatedInConsole = new Area(parentLocation.Sum(control.Area.Location), control.Area.Size);
 
-            bool inConsoleArea = IsOverlapping(consoleArea.Area, controlConsoleArea);
+            bool inConsoleArea = IsOverlapping(consoleArea, controlAreaLocatedInConsole);
             if (!inConsoleArea) {
                 return;
             }
 
             IReadOnlyColoredCharPicture readOnlyColoredCharPicture = control.Picture;
             if (readOnlyColoredCharPicture != null) {
-                VisualizePicture(readOnlyColoredCharPicture, controlConsoleArea, consoleArea);
+                VisualizePicture(readOnlyColoredCharPicture, controlAreaLocatedInConsole, consoleArea);
             }
 
             if (!(control is IReadOnlyControlContainer)) {
                 return;
             }
 
-            IReadOnlyControlContainer controlContainer = (IReadOnlyControlContainer)control;
+            IReadOnlyControlContainer controlContainer = control as IReadOnlyControlContainer;
             var internalControls = controlContainer.GetCurrentControls();
             if (internalControls.Empty()) {
                 return;
             }
 
             var internalControlsArea = controlContainer.InternalArea;
-            var consoleInternalControlsArea = new Area(internalControlsArea.Location.Add(controlConsoleArea.Location), internalControlsArea.Size);
-            if (!IsOverlapping(consoleArea.Area, consoleInternalControlsArea)) {
+            var consoleInternalControlsArea = new Area(internalControlsArea.Location.Add(controlAreaLocatedInConsole.Location), internalControlsArea.Size);
+            if (!IsOverlapping(consoleArea, consoleInternalControlsArea)) {
                 return;
             }
 
-            ConsoleArea consoleAreaInternalControlsArea = consoleArea.SplitOffArea(consoleInternalControlsArea);
+            Area consoleAreaInternalControlsArea = GetOverlappingArea(consoleArea, consoleInternalControlsArea);
 
             List<IReadOnlyControl> controls = internalControls.ToList();
             if (controls.Count > 1) {
@@ -82,25 +102,30 @@ namespace ConsoleFormsLibrary.Consoles.Abstract {
             }
 
             foreach (var internalControl in controls) {
-                Visualize(internalControl, controlConsoleArea.Location, consoleAreaInternalControlsArea);
+                Visualize(internalControl, controlAreaLocatedInConsole.Location, consoleAreaInternalControlsArea);
             }
         }
 
-        private void VisualizePicture(IReadOnlyColoredCharPicture picture, Area consoleControlArea, ConsoleArea consoleArea) {
-            // Remember picture may be lower then control size.
+        private void VisualizePicture(IReadOnlyColoredCharPicture picture, Area consoleControlArea, Area consoleArea) {
+            // Remember picture may be lower than control size.
             Area consolePictureArea = new Area(consoleControlArea.Location, picture.Size);
-            if (!IsOverlapping(consolePictureArea, consoleArea.Area)) {
+            if (!IsOverlapping(consolePictureArea, consoleArea)) {
                 return;
             }
 
-            for (int consoleY = consoleControlArea.Location.Y, pictureY = 0; pictureY < picture.Size.Height && pictureY < consoleControlArea.Size.Height && consoleY <= consoleArea.Area.Location.Y.GetBound(consoleArea.Area.Size.Height); pictureY++, consoleY++) {
-                for (int consoleX = consoleControlArea.Location.X, pictureX = 0; pictureX < picture.Size.Width && pictureX < consoleControlArea.Size.Width && consoleX <= consoleArea.Area.Location.X.GetBound(consoleArea.Area.Size.Width); pictureX++, consoleX++) {
+            for (int consoleY = consoleControlArea.Location.Y, pictureY = 0; pictureY < picture.Size.Height && pictureY < consoleControlArea.Size.Height && consoleY <= consoleArea.Location.Y.GetBound(consoleArea.Size.Height); pictureY++, consoleY++) {
+                for (int consoleX = consoleControlArea.Location.X, pictureX = 0; pictureX < picture.Size.Width && pictureX < consoleControlArea.Size.Width && consoleX <= consoleArea.Location.X.GetBound(consoleArea.Size.Width); pictureX++, consoleX++) {
+                    Point charConsoleLocation = new Point(consoleX, consoleY);
+                    if (!IsInRectangle(consoleArea, charConsoleLocation)) {
+                        continue;
+                    }
+                    
                     ColoredChar charToPrint = picture[pictureX, pictureY];
                     if (picture.IsTransparent && charToPrint.Char == ' ') {
                         continue;
                     }
 
-                    consoleArea.Print(new Point(consoleX, consoleY), charToPrint);
+                    Driver.Print(charConsoleLocation, charToPrint);
                 }
             }
         }

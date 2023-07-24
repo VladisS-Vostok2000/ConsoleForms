@@ -7,12 +7,26 @@ using System.Threading.Tasks;
 
 using ConsoleFormsLibrary.Controls.Abstract;
 using DrawingLibrary;
+using LinesLibrary;
 
 namespace ConsoleFormsLibrary.Controls {
     public sealed class BarControl : Control {
         public override IReadOnlyColoredCharPicture Picture => EditablePicture;
 
-        public int ProgressPercentage { get; set; }
+        private int progressPercentage;
+        public int ProgressPercentage {
+            get => progressPercentage;
+            set {
+                if (progressPercentage == value) {
+                    return;
+                }
+
+                progressPercentage = value;
+                if (AutoRender) {
+                    Render();
+                }
+            }
+        }
 
         private int barLength;
         /// 
@@ -20,11 +34,18 @@ namespace ConsoleFormsLibrary.Controls {
         public int BarLength {
             get => barLength;
             set {
+                if (value == barLength) {
+                    return;
+                }
+
                 if (value < 3) {
                     throw new ArgumentException("Too small width for bar.");
                 }
 
                 barLength = value;
+                if (AutoRender) {
+                    Render();
+                }
             }
         }
 
@@ -47,7 +68,7 @@ namespace ConsoleFormsLibrary.Controls {
 
 
 
-        public override void Render() {
+        protected override void _Render() {
             Size controlSize = new Size(barLength, 1);
             if (EditablePicture == null || EditablePicture.Size != controlSize) {
                 EditablePicture = new ColoredCharsArrayPicture(controlSize);

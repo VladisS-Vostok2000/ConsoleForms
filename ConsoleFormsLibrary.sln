@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellsGraphicLibrary", "..\C
 		{890651DF-C0C2-43FA-B0B2-80F39CBC7022} = {890651DF-C0C2-43FA-B0B2-80F39CBC7022}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinesLibrary", "..\LinesLibrary\LinesLibrary.csproj", "{3E7A17A9-8582-4A4C-AF86-E6B94FB254EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{12CFCB82-8956-4045-BBB4-4E2FE2A730A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12CFCB82-8956-4045-BBB4-4E2FE2A730A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12CFCB82-8956-4045-BBB4-4E2FE2A730A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7A17A9-8582-4A4C-AF86-E6B94FB254EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7A17A9-8582-4A4C-AF86-E6B94FB254EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7A17A9-8582-4A4C-AF86-E6B94FB254EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7A17A9-8582-4A4C-AF86-E6B94FB254EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

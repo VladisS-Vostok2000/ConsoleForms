@@ -7,6 +7,7 @@ using System.Threading;
 
 using BasicLibrary;
 using ConsoleFormsLibrary.Controls.Abstract;
+using LinesLibrary;
 
 namespace ConsoleFormsLibrary.Controls {
     public class RadioControl : Control {
@@ -25,7 +26,14 @@ namespace ConsoleFormsLibrary.Controls {
         public int SelectedOptionIndex {
             get => selectedOptionIndex;
             set {
+                if (selectedOptionIndex == value) {
+                    return;
+                }
+
                 selectedOptionIndex = value.ToRange(0, options.Count);
+                if (AutoRender) {
+                    Render();
+                }
             }
         }
 
@@ -49,14 +57,24 @@ namespace ConsoleFormsLibrary.Controls {
 
 
 
-        public RadioControl() { }
+        public RadioControl() {
+            options = new MulticoloredLine[0];
+        }
+        public RadioControl(params MulticoloredLine[] options) {
+            Options = options;
+        }
         public RadioControl(IEnumerable<MulticoloredLine> options) {
             Options = options.ToList();
         }
 
 
 
-        public override void Render() {
+        protected override void _Render() {
+            if (Options.Count == 0) {
+                EditablePicture = null;
+                return;
+            }
+
             Size currentSize = CountSize();
             if (EditablePicture == null || EditablePicture.Size != currentSize) {
                 EditablePicture = new ColoredCharsArrayPicture(currentSize);

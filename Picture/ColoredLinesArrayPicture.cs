@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using BasicLibrary;
+using LinesLibrary;
 
 namespace ConsoleFormsLibrary {
     public class ColoredLinesArrayPicture : IReadOnlyColoredCharPicture {

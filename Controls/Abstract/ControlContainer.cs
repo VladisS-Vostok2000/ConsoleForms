@@ -29,11 +29,11 @@ namespace ConsoleFormsLibrary.Controls.Abstract {
 
 
 
-        // TODO: make own readonly collection with kovariance.
+        // TODO: make own readonly collection with covariance.
         public IReadOnlyCollection<IReadOnlyControl> GetCurrentControls() {
             var outCollection = new HashSet<IReadOnlyControl>();
             foreach (var control in controls) {
-                outCollection.Add((IReadOnlyControl)control);
+                outCollection.Add(control);
             }
 
             return outCollection;

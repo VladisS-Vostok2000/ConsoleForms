@@ -6,11 +6,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using LinesLibrary;
+
 namespace ConsoleFormsLibrary.Controls {
     public class ButtonControl : Control {
         public override IReadOnlyColoredCharPicture Picture => EditablePicture;
-        
-        public bool Selected { get; set; }
+
+        private bool selected;
+        public bool Selected {
+            get => selected;
+            set {
+                if (selected == value) {
+                    return;
+                }
+
+                selected = value;
+                if (AutoRender) {
+                    Render();
+                }
+            }
+        }
 
 
 
@@ -25,7 +40,7 @@ namespace ConsoleFormsLibrary.Controls {
 
 
 
-        public override void Render() {
+        protected override void _Render() {
             int width = Text.Length + 2;
             if (EditablePicture == null || EditablePicture.Size.Width != width) {
                 EditablePicture = new ColoredCharsArrayPicture(new Size(width, 1));

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using LinesLibrary;
+
 namespace ConsoleFormsLibrary.Consoles.Abstract {
     public interface IDriver {
         void Print(Point location, ColoredChar coloredChar);
