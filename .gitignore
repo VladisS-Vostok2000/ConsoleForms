@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Draw.io temp files
+*.drawio.bkp
+*.drawio.dtmp
+
+
 # User-specific files
 *.rsuser
 *.suo
