@@ -1,15 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33423.256
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleFormsLibrary", "ConsoleFormsLibrary.csproj", "{90987DDF-7206-425D-86BE-9D146B048D85}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5A25B132-770A-4480-8994-576C46176553} = {5A25B132-770A-4480-8994-576C46176553}
-		{12CFCB82-8956-4045-BBB4-4E2FE2A730A2} = {12CFCB82-8956-4045-BBB4-4E2FE2A730A2}
-		{890651DF-C0C2-43FA-B0B2-80F39CBC7022} = {890651DF-C0C2-43FA-B0B2-80F39CBC7022}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicLibrary", "..\BasicLibrary.Framework4.8\BasicLibrary.csproj", "{890651DF-C0C2-43FA-B0B2-80F39CBC7022}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingLibrary", "..\DrawingLibrary\DrawingLibrary.csproj", "{5A25B132-770A-4480-8994-576C46176553}"
@@ -25,16 +18,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellsGraphicLibrary", "..\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinesLibrary", "..\LinesLibrary\LinesLibrary.csproj", "{3E7A17A9-8582-4A4C-AF86-E6B94FB254EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleFormsLibrary", "src\ConsoleFormsLibrary.csproj", "{90987DDF-7206-425D-86BE-9D146B048D85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{90987DDF-7206-425D-86BE-9D146B048D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90987DDF-7206-425D-86BE-9D146B048D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90987DDF-7206-425D-86BE-9D146B048D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90987DDF-7206-425D-86BE-9D146B048D85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{890651DF-C0C2-43FA-B0B2-80F39CBC7022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{890651DF-C0C2-43FA-B0B2-80F39CBC7022}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{890651DF-C0C2-43FA-B0B2-80F39CBC7022}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +42,10 @@ Global
 		{3E7A17A9-8582-4A4C-AF86-E6B94FB254EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E7A17A9-8582-4A4C-AF86-E6B94FB254EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E7A17A9-8582-4A4C-AF86-E6B94FB254EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90987DDF-7206-425D-86BE-9D146B048D85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90987DDF-7206-425D-86BE-9D146B048D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90987DDF-7206-425D-86BE-9D146B048D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90987DDF-7206-425D-86BE-9D146B048D85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
